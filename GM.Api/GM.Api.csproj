@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GM.BLL\GM.BLL.csproj" />
     <ProjectReference Include="..\GM.Common\GM.Common.csproj" />
     <ProjectReference Include="..\GM.DAL\GM.DAL.csproj" />
   </ItemGroup>

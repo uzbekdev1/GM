@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+using GM.BLL.Services;
 using GM.DAL;
 using GM.DAL.Entity;
 using GM.DAL.Extension;
@@ -38,12 +39,13 @@ namespace GM.Api
             //mvc            
             services.AddMvc(options =>
             {
+                //TODO:
+
             }).AddJsonOptions(options =>
                 {
                     options.SerializerSettings.FloatFormatHandling = FloatFormatHandling.DefaultValue;
                     options.SerializerSettings.DateFormatHandling = DateFormatHandling.IsoDateFormat;
                     options.SerializerSettings.Formatting = Formatting.Indented;
-                    options.SerializerSettings.TypeNameHandling = TypeNameHandling.All;
                     options.SerializerSettings.PreserveReferencesHandling = PreserveReferencesHandling.None;
                     options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                     options.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Local;
@@ -59,6 +61,9 @@ namespace GM.Api
             //logs
             services.AddLogging();
 
+            //http
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
             //db
             services.AddDbContext<ApplicationDbContext>(options => options.SafeConfigure(Configuration.GetConnectionString("DefaultConnection")));
 
@@ -67,13 +72,23 @@ namespace GM.Api
 
             //repos
             services.AddScoped<IGenericRepository<Server>, GenericRepository<Server>>();
+            services.AddScoped<IGenericRepository<GameMode>, GenericRepository<GameMode>>();
+            services.AddScoped<IGenericRepository<Map>, GenericRepository<Map>>();
+            services.AddScoped<IGenericRepository<Player>, GenericRepository<Player>>();
+            services.AddScoped<IGenericRepository<Scoreboard>, GenericRepository<Scoreboard>>();
+            services.AddScoped<IGenericRepository<Matche>, GenericRepository<Matche>>();
+
+            //services
+            services.AddScoped<IServerService, ServerService>();
+            services.AddScoped<IPlayerService, PlayerService>();
+            services.AddScoped<IReportService, ReportService>();
 
             // Inject an implementation of ISwaggerProvider with defaulted settings applied
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info
                 {
-                    Title = "Игровые сервер RESTful API",
+                    Title = "Многопользовательской игры-шутера RESTful API",
                     Version = "v1",
                     Contact = new Contact
                     {
@@ -84,8 +99,6 @@ namespace GM.Api
                     Description = @"Игровые сервера анонсируют себя advertise-запросами, затем присылают результаты каждого завершенного матча. Сервер статистики аккумулирует разную статистику по результатам матчей и отдает её по запросам (статистика по серверу, статистика по игроку, топ игроков и т.д.)."
                 });
             });
-
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
         }
 
@@ -107,10 +120,10 @@ namespace GM.Api
             // Enable middleware to serve swagger-ui assets (HTML, JS, CSS etc.)
             app.UseSwaggerUI(c =>
             {
-                c.DocumentTitle = "Игровые сервер";
+                c.DocumentTitle = "Многопользовательской игры-шутера";
                 c.RoutePrefix = string.Empty;
                 c.HeadContent = "";
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Игровые сервер RESTful API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Многопользовательской игры-шутера RESTful API V1");
             });
 
         }

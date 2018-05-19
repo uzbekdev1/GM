@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GM.BLL.Dto;
+using GM.BLL.Services;
 using GM.DAL.Entity;
 using Microsoft.AspNetCore.Mvc;
 using GM.DAL.Infrastructure;
@@ -10,57 +12,37 @@ using Microsoft.Extensions.Logging;
 
 namespace GM.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("servers")]
     public class ServerController : Controller
     {
         private readonly IGenericRepository<Server> _repository;
-        private readonly IHttpContextAccessor _accessor;
-        private readonly ILogger _logger;
+        private readonly IServerService _service;
 
-        public ServerController(IGenericRepository<Server> repository, IHttpContextAccessor accessor, ILogger logger)
+        public ServerController(IGenericRepository<Server> repository, IServerService service)
         {
             _repository = repository;
-            _accessor = accessor;
-            _logger = logger;
+            _service = service;
         }
 
-        // GET api/values
-        [HttpGet]
-        public async Task<IEnumerable<Server>> Get()
+        // servers/info GET 
+        [HttpGet("info")]
+        public async Task<IEnumerable<ServerInfo>> GetInfos()
         {
-            var ip = _accessor.HttpContext.Connection.RemoteIpAddress.ToString();
-
-            _logger.LogInformation(ip);
-
-            return await _repository.GetAll();
+            return await _service.GetInfos();
         }
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public async Task<Server> Get(long id)
+        // servers/<endpoint>/info  GET
+        [HttpGet("info/{endpoint}")]
+        public async Task<ServerInfo> GetInfo(string endpoint)
         {
-            return await _repository.Find(id);
+            return await _service.GetInfo(endpoint);
         }
 
-        // POST api/values
-        [HttpPost]
-        public async Task Post([FromBody]Server model)
+        // servers/<endpoint>/info PUT 
+        [HttpPut("info/{endpoint}")]
+        public async Task<ServerInfo> PutInfo(string endpoint)
         {
-            await _repository.Add(model);
-        }
-
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public async Task Put(long id, [FromBody]Server model)
-        {
-            await _repository.Update(model);
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public async Task Delete(long id)
-        {
-            await _repository.Delete(id);
+            return await _service.GetInfo(endpoint);
         }
 
     }

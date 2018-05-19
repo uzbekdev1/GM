@@ -10,13 +10,26 @@ namespace GM.XUnit
 {
     public class ApplicationDbContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
     {
-        public ApplicationDbContext CreateDbContext(string[] args)
+
+        public ApplicationDbContext CreateDbContext(params string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
 
-            optionsBuilder.SafeConfigure("Server=localhost;Database=GM-Test;User Id=sa;Password=web@1234;MultipleActiveResultSets=true;");
+            optionsBuilder.SafeConfigure("Server=localhost;Database=GM-TEST;User Id=sa;Password=web@1234;MultipleActiveResultSets=true;");
 
             return new ApplicationDbContext(optionsBuilder.Options);
         }
+
+        #region Instance
+
+        private static ApplicationDbContextFactory _factory;
+
+        public static ApplicationDbContext CreateDbContextInstance()
+        {
+            return (_factory ?? (_factory = new ApplicationDbContextFactory())).CreateDbContext();
+        }
+
+        #endregion
+
     }
 }

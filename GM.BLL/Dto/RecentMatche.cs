@@ -2,7 +2,7 @@
 
 namespace GM.BLL.Dto
 {
-    public class RecentMatches
+    public class RecentMatche
     {
         public string Server { get; set; }
 
@@ -10,7 +10,7 @@ namespace GM.BLL.Dto
 
         public MatcheResult Results { get; set; }
 
-        public RecentMatches()
+        public RecentMatche()
         {
             Results = new MatcheResult();
         }

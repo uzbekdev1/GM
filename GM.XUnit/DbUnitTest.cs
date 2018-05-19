@@ -11,7 +11,7 @@ namespace GM.XUnit
         [Fact(DisplayName = "Check version")]
         public async void Check_Versoin_Test()
         {
-            var factory = new ApplicationDbContextFactory().CreateDbContext(new string[0]);
+            var factory = ApplicationDbContextFactory.CreateDbContextInstance();
 
             await factory.Database.OpenConnectionAsync();
 
@@ -19,7 +19,7 @@ namespace GM.XUnit
             {
                 using (var com = db.CreateCommand())
                 {
-                    com.CommandText = "select @@VERSION";
+                    com.CommandText = "SELECT @@VERSION";
                     var version = (string)com.ExecuteScalar();
 
                     Assert.NotNull(version);
