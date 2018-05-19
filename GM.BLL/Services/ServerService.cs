@@ -23,7 +23,7 @@ namespace GM.BLL.Services
             return Task.FromResult<IEnumerable<ServerInfo>>(new ServerInfo[0]);
         }
 
-        public Task<Matche> GetMatche(string endpoint)
+        public Task<Matche> GetMatche(string endpoint,string timestamp)
         {
             return Task.FromResult(new Matche());
         }

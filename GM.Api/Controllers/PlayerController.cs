@@ -19,7 +19,7 @@ namespace GM.Api.Controllers
             _service = service;
         }
 
-        // players/<name>/stats GET
+        // <name>/stats GET
         [HttpGet("{name}/stats")]
         public async Task<PlayerState> GetStates(string name)
         {

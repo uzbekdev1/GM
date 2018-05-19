@@ -20,25 +20,47 @@ namespace GM.Api.Controllers
             _service = service;
         }
 
-        // servers/info GET 
+        // info GET 
         [HttpGet("info")]
         public async Task<IEnumerable<ServerInfo>> GetInfos()
         {
             return await _service.GetInfos();
         }
 
-        // servers/<endpoint>/info  GET
-        [HttpGet("info/{endpoint}")]
+        // <endpoint>/info  GET
+        [HttpGet("{endpoint}/info")]
         public async Task<ServerInfo> GetInfo(string endpoint)
         {
             return await _service.GetInfo(endpoint);
         }
 
-        // servers/<endpoint>/info PUT 
-        [HttpPut("info/{endpoint}")]
+        // <endpoint>/info PUT 
+        [HttpPut("{endpoint}/info")]
         public async Task<ServerInfo> PutInfo(string endpoint)
         {
             return await _service.GetInfo(endpoint);
         }
+
+        // <endpoint>/matches/<timestamp> GET
+        [HttpGet("{endpoint}/matches/timestamp")]
+        public async Task<Matche> GetMatches(string endpoint, string timestamp)
+        {
+            return await _service.GetMatche(endpoint, timestamp);
+        }
+
+        // endpoint>/matches/<timestamp> PUT 
+        [HttpPut("{endpoint}/matches/timestamp")]
+        public async Task<Matche> PutMatches(string endpoint, string timestamp)
+        {
+            return await _service.GetMatche(endpoint, timestamp);
+        }
+
+        // <endpoint>/stats GET
+        [HttpPut("{endpoint}/stats")]
+        public async Task<ServerState> GetState(string endpoint)
+        {
+            return await _service.GetState(endpoint);
+        }
+
     }
 }

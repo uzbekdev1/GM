@@ -33,21 +33,21 @@ namespace GM.Api.Controllers
             _gameModeRepository = gameModeRepository;
         }
 
-        // reports/recent-matches[/<count>] GET
+        // recent-matches[/<count>] GET
         [HttpGet("recent-matches/{count}")]
         public async Task<IEnumerable<RecentMatche>> GetRecentMatches(int count)
         {
             return await _service.GetRecentMatches(count);
         }
 
-        // reports/best-players[/<count>] GET
+        // best-players[/<count>] GET
         [HttpGet("best-players/{count}")]
         public async Task<IEnumerable<BestPlayer>> GetBestPlayers(int count)
         {
             return await _service.GetBestPlayers(count);
         }
 
-        // reports/best-players[/<count>] GET
+        // best-players[/<count>] GET
         [HttpGet("popular-servers/{count}")]
         public async Task<IEnumerable<PopularServer>> GetPopularServers(int count)
         {
