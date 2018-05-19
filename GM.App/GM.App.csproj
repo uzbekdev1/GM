@@ -7,6 +7,8 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants>TRACE;DEBUG;NETCOREAPP2_0</DefineConstants>
+    <LangVersion>default</LangVersion>
+    <NoWarn>1701;1702;1705;4092</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>

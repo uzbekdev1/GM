@@ -6,12 +6,12 @@ namespace GM.App
 {
     public class Program
     {
-        [Option(CommandOptionType.SingleOrNoValue, Description = "The url prefix")]
-        public string Prefix { get; }
-
         public static int Main(string[] args) => CommandLineApplication.Execute<Program>(args);
 
-        private void OnExecuteAsync()
+        [Option(Description = "The url prefix", ShortName = "p", LongName = "prefix", ValueName = "http://+:5555/")]
+        public string Prefix { get; }
+
+        private void OnExecute()
         {
             var prefix = Prefix ?? "http://+:5555/";
 
@@ -19,6 +19,7 @@ namespace GM.App
             {
                 serv.Run();
             }
+
         }
     }
 }
