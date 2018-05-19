@@ -11,7 +11,8 @@ namespace GM.DAL.Entity
             Scoreboards = new HashSet<Scoreboard>();
         }
 
-        [StringLength(50)] public string Name { get; set; }
+        [StringLength(50)]
+        public string Name { get; set; }
 
         public virtual ICollection<Scoreboard> Scoreboards { get; set; }
     }

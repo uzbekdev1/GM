@@ -11,7 +11,8 @@ namespace GM.DAL.Entity
             Matches = new HashSet<Matche>();
         }
 
-        [StringLength(250)] public string Name { get; set; }
+        [StringLength(250)]
+        public string Name { get; set; }
 
         public virtual ICollection<Matche> Matches { get; set; }
     }
