@@ -8,7 +8,6 @@ namespace GM.DAL.Infrastructure
 {
     public interface IGenericRepository<T> : IDisposable where T : IEntity
     {
-
         Task<IEnumerable<T>> GetAll();
 
         IQueryable<T> FindBy(Expression<Func<T, bool>> predicate);
@@ -22,6 +21,5 @@ namespace GM.DAL.Infrastructure
         Task Update(T entity, bool force = true);
 
         Task SaveChanges();
-
     }
 }

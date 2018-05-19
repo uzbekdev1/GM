@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using GM.BLL.Dto;
 using GM.BLL.Infrastructure;
@@ -10,7 +8,6 @@ namespace GM.BLL.Services
 {
     public interface IServerService : IServiceFactory
     {
-
         Task<IEnumerable<ServerInfo>> GetInfos();
 
         Task<Matche> GetMatche(string endpoint);
@@ -18,6 +15,5 @@ namespace GM.BLL.Services
         Task<ServerInfo> GetInfo(string endpoint);
 
         Task<ServerState> GetState(string endpoint);
-
     }
 }

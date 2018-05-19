@@ -1,6 +1,3 @@
-using System;
-using System.Diagnostics;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 
@@ -20,12 +17,11 @@ namespace GM.XUnit
                 using (var com = db.CreateCommand())
                 {
                     com.CommandText = "SELECT @@VERSION";
-                    var version = (string)com.ExecuteScalar();
+                    var version = (string) com.ExecuteScalar();
 
                     Assert.NotNull(version);
                 }
             }
-
         }
     }
 }

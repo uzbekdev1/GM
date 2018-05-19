@@ -18,6 +18,5 @@
         public float TimeElapsed { get; set; }
 
         public ScoreboardItem[] Scoreboard { get; set; }
-
     }
 }

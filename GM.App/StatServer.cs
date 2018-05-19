@@ -1,22 +1,41 @@
 ﻿using System;
+using System.IO;
+using System.Threading.Tasks;
+using GM.Api;
 using GM.DAL;
-using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace GM.Api
+namespace GM.App
 {
-    public class Program
+    internal sealed class StatServer : IDisposable
     {
-        private static IWebHost BuildWebHost(string[] args) => WebHost.CreateDefaultBuilder(args).UseStartup<Startup>().Build();
+        private readonly IWebHost _webHost;
 
-        public static void Main(string[] args)
+        public StatServer(string prefix)
         {
-            var host = BuildWebHost(args);
+            _webHost = new WebHostBuilder()
+                .UseKestrel()
+                .UseContentRoot(Directory.GetCurrentDirectory())
+                .UseUrls(prefix)
+                .UseIISIntegration()
+                .UseStartup<Startup>()
+                .Build();
+        }
 
-            using (var serviceScope = host.Services.CreateScope())
+        public void Dispose()
+        {
+            _webHost.StopAsync().GetAwaiter().GetResult();
+            _webHost.Dispose();
+
+            GC.SuppressFinalize(this);
+        }
+
+        public void Run()
+        {
+            using (var serviceScope = _webHost.Services.CreateScope())
             {
                 var services = serviceScope.ServiceProvider;
                 var logger = services.GetRequiredService<ILogger<Program>>();
@@ -35,7 +54,6 @@ namespace GM.Api
 
                         logger.LogInformation("Database migrated successfully.");
                     }
-
                 }
                 catch (Exception ex)
                 {
@@ -43,8 +61,7 @@ namespace GM.Api
                 }
             }
 
-            host.Run();
+            _webHost.Run();
         }
-
     }
 }

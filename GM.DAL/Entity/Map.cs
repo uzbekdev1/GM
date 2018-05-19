@@ -6,16 +6,13 @@ namespace GM.DAL.Entity
 {
     public class Map : BaseEntity
     {
-
-        [StringLength(250)]
-        public string Name { get; set; }
-
-        public virtual ICollection<Matche> Matches { get; set; } 
-
         public Map()
         {
-            Matches = new HashSet<Matche>(); 
+            Matches = new HashSet<Matche>();
         }
 
+        [StringLength(250)] public string Name { get; set; }
+
+        public virtual ICollection<Matche> Matches { get; set; }
     }
 }

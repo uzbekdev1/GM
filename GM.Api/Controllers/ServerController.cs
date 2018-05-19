@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using GM.BLL.Dto;
 using GM.BLL.Services;
 using GM.DAL.Entity;
-using Microsoft.AspNetCore.Mvc;
 using GM.DAL.Infrastructure;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Mvc;
 
 namespace GM.Api.Controllers
 {
@@ -44,6 +40,5 @@ namespace GM.Api.Controllers
         {
             return await _service.GetInfo(endpoint);
         }
-
     }
 }

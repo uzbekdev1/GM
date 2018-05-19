@@ -8,7 +8,5 @@ namespace GM.DAL.Infrastructure
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
-
     }
-
 }

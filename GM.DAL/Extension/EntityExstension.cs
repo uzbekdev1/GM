@@ -7,6 +7,6 @@ namespace GM.DAL.Extension
         public static string GetServerEndpoint(this Server server)
         {
             return $"{server.Hostname}-{server.Port}";
-        } 
+        }
     }
 }

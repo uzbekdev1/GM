@@ -1,26 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Threading.Tasks;
-using GM.BLL.Services;
+﻿using GM.BLL.Services;
 using GM.DAL;
 using GM.DAL.Entity;
 using GM.DAL.Extension;
 using GM.DAL.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Swashbuckle.AspNetCore.Swagger;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.Formatters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Serialization;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace GM.Api
 {
@@ -40,23 +30,22 @@ namespace GM.Api
             services.AddMvc(options =>
             {
                 //TODO:
-
             }).AddJsonOptions(options =>
+            {
+                options.SerializerSettings.FloatFormatHandling = FloatFormatHandling.DefaultValue;
+                options.SerializerSettings.DateFormatHandling = DateFormatHandling.IsoDateFormat;
+                options.SerializerSettings.Formatting = Formatting.Indented;
+                options.SerializerSettings.PreserveReferencesHandling = PreserveReferencesHandling.None;
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                options.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Local;
+                options.SerializerSettings.DateParseHandling = DateParseHandling.DateTime;
+                options.SerializerSettings.FloatParseHandling = FloatParseHandling.Double;
+                options.SerializerSettings.Converters.Add(new StringEnumConverter
                 {
-                    options.SerializerSettings.FloatFormatHandling = FloatFormatHandling.DefaultValue;
-                    options.SerializerSettings.DateFormatHandling = DateFormatHandling.IsoDateFormat;
-                    options.SerializerSettings.Formatting = Formatting.Indented;
-                    options.SerializerSettings.PreserveReferencesHandling = PreserveReferencesHandling.None;
-                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-                    options.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Local;
-                    options.SerializerSettings.DateParseHandling = DateParseHandling.DateTime;
-                    options.SerializerSettings.FloatParseHandling = FloatParseHandling.Double;
-                    options.SerializerSettings.Converters.Add(new StringEnumConverter
-                    {
-                        CamelCaseText = true,
-                        AllowIntegerValues = true
-                    });
+                    CamelCaseText = true,
+                    AllowIntegerValues = true
                 });
+            });
 
             //logs
             services.AddLogging();
@@ -65,7 +54,8 @@ namespace GM.Api
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             //db
-            services.AddDbContext<ApplicationDbContext>(options => options.SafeConfigure(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.SafeConfigure(Configuration.GetConnectionString("DefaultConnection")));
 
             //unit of work
             services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -96,23 +86,25 @@ namespace GM.Api
                         Name = "Elyor Latipov",
                         Url = "https://www.linkedin.com/in/levdeo/"
                     },
-                    Description = @"Игровые сервера анонсируют себя advertise-запросами, затем присылают результаты каждого завершенного матча. Сервер статистики аккумулирует разную статистику по результатам матчей и отдает её по запросам (статистика по серверу, статистика по игроку, топ игроков и т.д.)."
+                    Description =
+                        @"Игровые сервера анонсируют себя advertise-запросами, затем присылают результаты каждого завершенного матча. Сервер статистики аккумулирует разную статистику по результатам матчей и отдает её по запросам (статистика по серверу, статистика по игроку, топ игроков и т.д.)."
                 });
             });
-
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseBrowserLink();
-            }
+            // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+#if DEBUG
+            app.UseDeveloperExceptionPage();
+            app.UseBrowserLink();
+            app.UseDatabaseErrorPage();
+#endif
 
             app.UseMvc();
             app.UseMvcWithDefaultRoute();
+            app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowCredentials()
+                .SetIsOriginAllowedToAllowWildcardSubdomains());
 
             // Enable middleware to serve generated Swagger as a JSON endpoint
             app.UseSwagger();
@@ -125,7 +117,6 @@ namespace GM.Api
                 c.HeadContent = "";
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Многопользовательской игры-шутера RESTful API V1");
             });
-
         }
     }
 }

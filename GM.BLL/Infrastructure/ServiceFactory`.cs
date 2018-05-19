@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using GM.DAL.Infrastructure;
+﻿using GM.DAL.Infrastructure;
 
 namespace GM.BLL.Infrastructure
 {
@@ -13,14 +10,13 @@ namespace GM.BLL.Infrastructure
             Repository = new GenericRepository<T>(unitOfWork);
         }
 
+        protected IUnitOfWork UnitOfWork { get; }
+
         public void Dispose()
         {
             Repository.Dispose();
         }
 
-        protected IUnitOfWork UnitOfWork { get; }
-
         public IGenericRepository<T> Repository { get; }
-
     }
 }

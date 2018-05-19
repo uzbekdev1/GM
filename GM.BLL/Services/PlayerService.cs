@@ -8,7 +8,6 @@ namespace GM.BLL.Services
 {
     public class PlayerService : ServiceFactory<Player>, IPlayerService
     {
-
         public PlayerService(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
         }

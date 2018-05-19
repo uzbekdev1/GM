@@ -9,7 +9,6 @@ namespace GM.DAL.Infrastructure
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     {
-
         private readonly IUnitOfWork _unitOfWork;
 
         public GenericRepository(IUnitOfWork unitOfWork)
@@ -71,5 +70,4 @@ namespace GM.DAL.Infrastructure
             _unitOfWork.Dispose();
         }
     }
-
 }

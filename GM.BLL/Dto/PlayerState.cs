@@ -4,7 +4,6 @@ namespace GM.BLL.Dto
 {
     public class PlayerState
     {
-
         public int TotalMatchesPlayed { get; set; }
 
         public int TotalMatchesWon { get; set; }
@@ -24,6 +23,5 @@ namespace GM.BLL.Dto
         public DateTime LastMatchPlayed { get; set; }
 
         public float KillToDeathRatio { get; set; }
-
     }
 }

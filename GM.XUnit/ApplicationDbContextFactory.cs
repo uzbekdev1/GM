@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using GM.Common;
 using GM.DAL;
 using GM.DAL.Extension;
 using Microsoft.EntityFrameworkCore;
@@ -10,12 +8,11 @@ namespace GM.XUnit
 {
     public class ApplicationDbContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
     {
-
         public ApplicationDbContext CreateDbContext(params string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
 
-            optionsBuilder.SafeConfigure("Server=localhost;Database=GM-TEST;User Id=sa;Password=web@1234;MultipleActiveResultSets=true;");
+            optionsBuilder.SafeConfigure(AppSettings.ConnectionString);
 
             return new ApplicationDbContext(optionsBuilder.Options);
         }
@@ -30,6 +27,5 @@ namespace GM.XUnit
         }
 
         #endregion
-
     }
 }

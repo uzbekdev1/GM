@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using GM.BLL.Dto;
 using GM.BLL.Infrastructure;
-using GM.DAL.Entity;
 using GM.DAL.Infrastructure;
 
 namespace GM.BLL.Services
 {
     public class ReportService : ServiceFactory, IReportService
     {
-
         public ReportService(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
         }

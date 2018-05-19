@@ -4,13 +4,12 @@ namespace GM.DAL.Infrastructure
 {
     public class UnitOfWork : IUnitOfWork
     {
-
-        public ApplicationDbContext Context { get; }
-
         public UnitOfWork(ApplicationDbContext context)
         {
             Context = context;
         }
+
+        public ApplicationDbContext Context { get; }
 
         public async Task Commit()
         {
@@ -21,7 +20,5 @@ namespace GM.DAL.Infrastructure
         {
             Context.Dispose();
         }
-
     }
-
 }

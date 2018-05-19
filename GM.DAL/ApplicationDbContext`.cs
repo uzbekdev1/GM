@@ -10,7 +10,7 @@ namespace GM.DAL
     {
         public ApplicationDbContext(DbContextOptions options)
             : base(options)
-        {    
+        {
         }
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
@@ -20,7 +20,8 @@ namespace GM.DAL
             return base.SaveChanges(acceptAllChangesOnSuccess);
         }
 
-        public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default(CancellationToken))
+        public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess,
+            CancellationToken cancellationToken = default(CancellationToken))
         {
             OnBeforeSaving();
 
@@ -32,7 +33,6 @@ namespace GM.DAL
             var entries = ChangeTracker.Entries();
 
             foreach (var entry in entries)
-            {
                 if (entry.Entity is AuditEntity)
                 {
                     var now = DateTime.Now;
@@ -53,8 +53,6 @@ namespace GM.DAL
                             break;
                     }
                 }
-            }
         }
-
     }
 }

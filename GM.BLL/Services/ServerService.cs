@@ -9,7 +9,6 @@ namespace GM.BLL.Services
 {
     public class ServerService : ServiceFactory<Server>, IServerService
     {
-
         public ServerService(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
         }
@@ -33,6 +32,5 @@ namespace GM.BLL.Services
         {
             return Task.FromResult(new ServerState());
         }
-
     }
 }

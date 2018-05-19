@@ -2,6 +2,10 @@
 {
     public class ServerMatche
     {
+        public ServerMatche()
+        {
+            Scoreboard = new ScoreboardItem[0];
+        }
 
         public string Map { get; set; }
 
@@ -14,11 +18,5 @@
         public float TimeElapsed { get; set; }
 
         public ScoreboardItem[] Scoreboard { get; set; }
-
-        public ServerMatche()
-        {
-            Scoreboard = new ScoreboardItem[0];
-        }
-
     }
 }
