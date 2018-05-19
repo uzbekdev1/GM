@@ -1,5 +1,5 @@
 ﻿- Go to(debug or release folder)
 - Run cmd as admin rule in this folder
-- Type here help options: 
+- List of options: 
 	a) Help: dotnet GM.App.dll --help 
 	b) Run: dotnet GM.App.dll --prefix "http://+:6666/"
