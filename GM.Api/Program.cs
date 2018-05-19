@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using GM.DAL;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace GM.Api
 {
@@ -30,7 +25,6 @@ namespace GM.Api
                 {
                     var db = services.GetRequiredService<ApplicationDbContext>();
 
-                    //enable auto migration
                     if (db.Database.EnsureCreated())
                     {
                         logger.LogInformation("Database created successfully.");
