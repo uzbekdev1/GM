@@ -10,7 +10,7 @@ namespace GM.BLL.Services
     {
         Task<IEnumerable<ServerInfo>> GetInfos();
 
-        Task<Matche> GetMatche(string endpoint,string timestamp);
+        Task<MatcheResult> GetMatche(string endpoint,string timestamp);
 
         Task<ServerInfo> GetInfo(string endpoint);
 

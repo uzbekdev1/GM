@@ -9,11 +9,12 @@ namespace GM.BLL.Infrastructure
             UnitOfWork = unitOfWork;
         }
 
-        protected IUnitOfWork UnitOfWork { get; }
+        protected IUnitOfWork UnitOfWork { get; } 
 
         public void Dispose()
         {
             UnitOfWork.Dispose();
         }
+
     }
 }

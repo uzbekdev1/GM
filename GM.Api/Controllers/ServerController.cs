@@ -43,14 +43,14 @@ namespace GM.Api.Controllers
 
         // <endpoint>/matches/<timestamp> GET
         [HttpGet("{endpoint}/matches/{timestamp}")]
-        public async Task<Matche> GetMatches(string endpoint, string timestamp)
+        public async Task<MatcheResult> GetMatches(string endpoint, string timestamp)
         {
             return await _service.GetMatche(endpoint, timestamp);
         }
 
         // endpoint>/matches/<timestamp> PUT 
         [HttpPut("{endpoint}/matches/{timestamp}")]
-        public async Task<Matche> PutMatches(string endpoint, string timestamp)
+        public async Task<MatcheResult> PutMatches(string endpoint, string timestamp)
         {
             return await _service.GetMatche(endpoint, timestamp);
         }

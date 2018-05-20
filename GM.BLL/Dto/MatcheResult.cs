@@ -15,7 +15,7 @@
 
         public int TimeLimit { get; set; }
 
-        public float TimeElapsed { get; set; }
+        public double TimeElapsed { get; set; }
 
         public ScoreboardItem[] Scoreboard { get; set; }
     }

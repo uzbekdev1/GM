@@ -1,4 +1,5 @@
 ﻿using GM.BLL.Services;
+using GM.Common;
 using GM.DAL;
 using GM.DAL.Entity;
 using GM.DAL.Extension;
@@ -54,8 +55,7 @@ namespace GM.Api
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             //db
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.SafeConfigure(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<ApplicationDbContext>(options => options.SafeConfigure(AppSettings.ConnectionString));
 
             //unit of work
             services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -103,8 +103,7 @@ namespace GM.Api
 
             app.UseMvc();
             app.UseMvcWithDefaultRoute();
-            app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowCredentials()
-                .SetIsOriginAllowedToAllowWildcardSubdomains());
+            app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowCredentials().SetIsOriginAllowedToAllowWildcardSubdomains());
 
             // Enable middleware to serve generated Swagger as a JSON endpoint
             app.UseSwagger();

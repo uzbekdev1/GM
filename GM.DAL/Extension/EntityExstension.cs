@@ -1,4 +1,5 @@
-﻿using GM.DAL.Entity;
+﻿using System;
+using GM.DAL.Entity;
 
 namespace GM.DAL.Extension
 {
@@ -8,5 +9,11 @@ namespace GM.DAL.Extension
         {
             return $"{server.Hostname}-{server.Port}";
         }
+
+        public static string GetDateTimestamp(this DateTime date)
+        {
+            return date.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'");
+        }
+         
     }
 }

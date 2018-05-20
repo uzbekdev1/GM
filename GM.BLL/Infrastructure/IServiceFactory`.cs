@@ -4,6 +4,6 @@ namespace GM.BLL.Infrastructure
 {
     public interface IServiceFactory<T> : IServiceFactory where T : IEntity
     {
-        IGenericRepository<T> Repository { get; }
+        IGenericRepository<T> Repository { get; } 
     }
 }
