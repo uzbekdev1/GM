@@ -20,7 +20,7 @@ namespace GM.Api.Controllers
         }
 
         // <name>/stats GET
-        [HttpGet("{name}/stats")]
+        [HttpGet("{name:length(10,50)}/stats")]
         public async Task<PlayerState> GetStates(string name)
         {
             return await _service.GetState(name);

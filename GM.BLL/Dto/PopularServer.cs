@@ -6,6 +6,6 @@
 
         public string Name { get; set; }
 
-        public float AverageMatchesPerDay { get; set; }
+        public double  AverageMatchesPerDay { get; set; }
     }
 }

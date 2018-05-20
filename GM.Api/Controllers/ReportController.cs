@@ -34,22 +34,22 @@ namespace GM.Api.Controllers
         }
 
         // recent-matches[/<count>] GET
-        [HttpGet("recent-matches/{count}")]
-        public async Task<IEnumerable<RecentMatche>> GetRecentMatches(int count)
+        [HttpGet("recent-matches/{count:int:range(1,50)}")]
+        public async Task<IEnumerable<RecentMatche>> GetRecentMatches(int count = 50)
         {
             return await _service.GetRecentMatches(count);
         }
 
         // best-players[/<count>] GET
-        [HttpGet("best-players/{count}")]
-        public async Task<IEnumerable<BestPlayer>> GetBestPlayers(int count)
+        [HttpGet("best-players/{count:int:range(1,50)}")]
+        public async Task<IEnumerable<BestPlayer>> GetBestPlayers(int count = 50)
         {
             return await _service.GetBestPlayers(count);
         }
 
         // best-players[/<count>] GET
-        [HttpGet("popular-servers/{count}")]
-        public async Task<IEnumerable<PopularServer>> GetPopularServers(int count)
+        [HttpGet("popular-servers/{count:int:range(1,50)}")]
+        public async Task<IEnumerable<PopularServer>> GetPopularServers(int count=50)
         {
             return await _service.GetPopularServers(count);
         }

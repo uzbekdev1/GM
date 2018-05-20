@@ -12,11 +12,11 @@
 
         public int MaximumMatchesPerDay { get; set; }
 
-        public float AverageMatchesPerDay { get; set; }
+        public double AverageMatchesPerDay { get; set; }
 
         public int MaximumPopulation { get; set; }
 
-        public float AveragePopulation { get; set; }
+        public double AveragePopulation { get; set; }
 
         public string[] Top5GameModes { get; set; }
 

@@ -28,35 +28,35 @@ namespace GM.Api.Controllers
         }
 
         // <endpoint>/info  GET
-        [HttpGet("{endpoint}/info")]
+        [HttpGet("{endpoint:length(10,50)}/info")]
         public async Task<ServerInfo> GetInfo(string endpoint)
         {
             return await _service.GetInfo(endpoint);
         }
 
         // <endpoint>/info PUT 
-        [HttpPut("{endpoint}/info")]
+        [HttpPut("{endpoint:length(10,50)}/info")]
         public async Task<ServerInfo> PutInfo(string endpoint)
         {
             return await _service.GetInfo(endpoint);
         }
 
         // <endpoint>/matches/<timestamp> GET
-        [HttpGet("{endpoint}/matches/{timestamp}")]
+        [HttpGet("{endpoint:length(10,50)}/matches/{timestamp:length(10,50)}")]
         public async Task<MatcheResult> GetMatches(string endpoint, string timestamp)
         {
             return await _service.GetMatche(endpoint, timestamp);
         }
 
         // endpoint>/matches/<timestamp> PUT 
-        [HttpPut("{endpoint}/matches/{timestamp}")]
+        [HttpPut("{endpoint:length(10,50)}/matches/{timestamp:length(10,50)}")]
         public async Task<MatcheResult> PutMatches(string endpoint, string timestamp)
         {
             return await _service.GetMatche(endpoint, timestamp);
         }
 
         // <endpoint>/stats GET
-        [HttpPut("{endpoint}/stats")]
+        [HttpPut("{endpoint:length(10,50)}/stats")]
         public async Task<ServerState> GetState(string endpoint)
         {
             return await _service.GetState(endpoint);

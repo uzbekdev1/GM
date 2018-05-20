@@ -14,14 +14,14 @@ namespace GM.BLL.Dto
 
         public string FavoriteGameMode { get; set; }
 
-        public float AverageScoreboardPercent { get; set; }
+        public double AverageScoreboardPercent { get; set; }
 
         public int MaximumMatchesPerDay { get; set; }
 
-        public float AverageMatchesPerDay { get; set; }
+        public double AverageMatchesPerDay { get; set; }
 
-        public DateTime LastMatchPlayed { get; set; }
+        public DateTime? LastMatchPlayed { get; set; }
 
-        public float KillToDeathRatio { get; set; }
+        public double KillToDeathRatio { get; set; }
     }
 }

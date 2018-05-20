@@ -11,7 +11,7 @@ namespace GM.BLL.Dto
 
         public string Server { get; set; }
 
-        public DateTime Timestamp { get; set; }
+        public string Timestamp { get; set; }
 
         public MatcheResult Results { get; set; }
     }

@@ -7,6 +7,9 @@ namespace GM.DAL.Extension
     {
         public static string GetServerEndpoint(this Server server)
         {
+            if (server == null)
+                return String.Empty;
+
             return $"{server.Hostname}-{server.Port}";
         }
 
@@ -14,6 +17,6 @@ namespace GM.DAL.Extension
         {
             return date.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'");
         }
-         
+
     }
 }
